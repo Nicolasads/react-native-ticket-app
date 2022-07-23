@@ -44,3 +44,7 @@ export const Title = styled.Text`
 export const EventList = styled(FlatList as new () => FlatList<DataProps>)`
   margin-left: 20px;
 `;
+
+export const CustomFlatlist = styled(FlatList as new () => FlatList<DataProps>)`
+  margin: 0px 20px 0px;
+`;

@@ -1,22 +1,22 @@
 import React from 'react';
-import {
-  Container,
-  EventList,
-  Events,
-  Input,
-  InputField,
-  SearchField,
-  Title,
-} from './styles';
-import Feather from 'react-native-vector-icons/Feather';
+import {Container, CustomFlatlist, EventList, Events, Title} from './styles';
 import {data, DataProps} from '../../data/data';
-import {ListRenderItem, ListRenderItemInfo} from 'react-native';
+import {ListRenderItem, ListRenderItemInfo, View} from 'react-native';
 import EventBanner from '../../components/EventBanner';
 import CardItem from '../../components/CardItem';
+import Search from '../../components/Search';
 
 export default function Home() {
-  function EventItem({item}: ListRenderItemInfo<DataProps>) {
-    return <CardItem data={item} />;
+  const spacing = {
+    justifyContent: 'space-between',
+  };
+
+  function eventItem({item}: ListRenderItemInfo<DataProps>) {
+    return (
+      <View>
+        <CardItem data={item} />
+      </View>
+    );
   }
 
   const renderItem: ListRenderItem<DataProps> = ({item}) => (
@@ -27,12 +27,7 @@ export default function Home() {
     <Container<React.ElementType>
       ListHeaderComponent={() => (
         <>
-          <SearchField>
-            <InputField>
-              <Feather name="search" size={24} color="#B1B1B1" />
-              <Input placeholder="Pesquisar evento" />
-            </InputField>
-          </SearchField>
+          <Search />
 
           <Events>
             <Title>Eventos em destaque</Title>
@@ -47,12 +42,16 @@ export default function Home() {
           </Events>
 
           <Title>Explore eventos</Title>
+
+          <CustomFlatlist<React.ElementType>
+            numColumns={2}
+            data={data}
+            renderItem={eventItem}
+            keyExtractor={(item: DataProps) => item.id}
+            columnWrapperStyle={spacing}
+          />
         </>
       )}
-      numColumns={2}
-      data={data}
-      keyExtractor={(item: DataProps) => item.id}
-      renderItem={EventItem}
     />
   );
 }

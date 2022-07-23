@@ -1,5 +1,7 @@
 import styled from 'styled-components/native';
 
+export const Touchable = styled.TouchableOpacity``;
+
 export const Container = styled.ImageBackground`
   width: 206px;
   height: 100px;
@@ -22,10 +24,12 @@ export const EventTitle = styled.Text`
 export const EventDate = styled.Text`
   color: ${({theme}) => theme.light};
   font-family: ${({theme}) => theme.fontSemiBold};
+  font-size: 12px;
   margin-top: 8px;
 `;
 
 export const EventPrice = styled.Text`
   color: ${({theme}) => theme.light};
   font-family: ${({theme}) => theme.fontSemiBold};
+  font-size: 12px;
 `;

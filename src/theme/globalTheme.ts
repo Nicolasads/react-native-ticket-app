@@ -3,7 +3,7 @@ export const globalTheme = {
   secondaryLight: '#fcfcfc',
   background: '#fefefe',
   primary: '#0087D2',
-  darkGray: '#353535',
+  darkGray: '#454545',
   mediumGray: '#676767',
   lightGray: '#999',
   border: '#c9c9c9',

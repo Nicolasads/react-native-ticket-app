@@ -8,14 +8,26 @@ import {
   ImageContent,
 } from './styles';
 import imagem from '../../assets/image/img3.png';
+import {useNavigation} from '@react-navigation/native';
 
 export default function CardItem({data}: {data: DataProps}) {
+  const navigation = useNavigation();
+
+  const navigateEvent = () => {
+    navigation.navigate(
+      'EventInfo' as never,
+      {
+        data: data,
+      } as never,
+    );
+  };
+
   return (
-    <Container>
+    <Container onPress={navigateEvent}>
       <ImageContent source={imagem} />
-      <EventTitle> {data.name} </EventTitle>
-      <EventDate> {data.date} </EventDate>
-      <EventPrice> {data.price} </EventPrice>
+      <EventTitle numberOfLines={2}>{data.name}</EventTitle>
+      <EventDate>{data.date}</EventDate>
+      <EventPrice>R$ {data.price}</EventPrice>
     </Container>
   );
 }

@@ -1,0 +1,48 @@
+{
+  "users": [
+    {
+      "email": "nicolas@email.com",
+      "password": "$2a$10$b5mjI6Ayp3zKYIWDrCR0AeIx7YBzM/9w5peU1NfwoEhJaDH2T8ni.",
+      "name": "Nicolas Alexsander",
+      "id": 1
+    }
+  ],
+  "events": [
+    {
+      "title": "UI Event 2022: Conceitos de UI/UX para usuários",
+      "startDate": "2022-07-27T16:00:00.904Z",
+      "enDate": "2022-07-27T19:00:00.904Z",
+      "price": 34.99,
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pulvinar aliquam vulputate. Quisque id nulla id urna ornare pharetra. Vestibulum tincidunt dignissim justo, quis rhoncus velit fringilla vel. Nunc ultricies vestibulum auctor. Aenean hendrerit ipsum vel elit ultrices rutrum. Pellentesque tincidunt eros et mi vehicula, sit amet mattis quam ornare. Duis commodo nunc ut sodales vulputate. Proin sed est dui. Proin eu arcu ut felis semper sodales. Donec vulputate consequat dui. Proin sem libero, volutpat quis nisi sit amet, dapibus tempor lorem. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Ut semper tellus a odio lobortis, pharetra congue ante ullamcorper.",
+      "image": "https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "id": 1
+    },
+    {
+      "title": "Evento Google 2022: Grandes Revoluções",
+      "startDate": "2022-07-27T14:00:00.904Z",
+      "enDate": "2022-07-27T18:00:00.904Z",
+      "price": 28.99,
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pulvinar aliquam vulputate. Quisque id nulla id urna ornare pharetra. Vestibulum tincidunt dignissim justo, quis rhoncus velit fringilla vel. Nunc ultricies vestibulum auctor. Aenean hendrerit ipsum vel elit ultrices rutrum. Pellentesque tincidunt eros et mi vehicula, sit amet mattis quam ornare.",
+      "image": "https://images.pexels.com/photos/218717/pexels-photo-218717.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "id": 2
+    },
+    {
+      "title": "Conferência <Devs> - MB Labs",
+      "startDate": "2022-07-27T15:00:00.904Z",
+      "enDate": "2022-07-27T17:00:00.904Z",
+      "price": 24.99,
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pulvinar aliquam vulputate. Quisque id nulla id urna ornare pharetra. Vestibulum tincidunt dignissim justo, quis rhoncus velit fringilla vel. Nunc ultricies vestibulum auctor. Aenean hendrerit ipsum vel elit ultrices rutrum. Pellentesque tincidunt eros et mi vehicula, sit amet mattis quam ornare.",
+      "image": "https://media-exp1.licdn.com/dms/image/C4D0BAQHKj6jB-nedqA/company-logo_200_200/0/1654875446936?e=1666828800&v=beta&t=Qx5SOIsoXUX7-sanX1tXDYtDy-5cW0Npv67vkWykn9E",
+      "id": 3
+    },
+    {
+      "title": "Fotógrafo de Milhões - Entrevista com os melhores fotógrafos do Brasil",
+      "startDate": "2022-07-29T14:00:00.904Z",
+      "enDate": "2022-07-29T18:00:00.904Z",
+      "price": 39.99,
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pulvinar aliquam vulputate. Quisque id nulla id urna ornare pharetra. Vestibulum tincidunt dignissim justo, quis rhoncus velit fringilla vel. Nunc ultricies vestibulum auctor. Aenean hendrerit ipsum vel elit ultrices rutrum. Pellentesque tincidunt eros et mi vehicula, sit amet mattis quam ornare.Quisque id nulla id urna ornare pharetra. Vestibulum tincidunt dignissim justo, quis rhoncus velit fringilla vel. Nunc ultricies vestibulum auctor.",
+      "image": "https://images.pexels.com/photos/1903308/pexels-photo-1903308.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "id": 4
+    }
+  ]
+}

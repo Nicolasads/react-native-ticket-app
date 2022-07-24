@@ -49,6 +49,9 @@ export const ModalFooter = styled.View`
 `;
 
 export const TotalValue = styled.Text`
+  font-family: ${({theme}) => theme.fontBold};
+  color: ${({theme}) => theme.mediumGray};
+  font-size: 16px;
   text-align: right;
   margin-bottom: 10px;
 `;

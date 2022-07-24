@@ -1,27 +1,66 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Container, CustomFlatlist, EventList, Events, Title} from './styles';
-import {data, DataProps} from '../../data/data';
-import {ListRenderItem, ListRenderItemInfo, View} from 'react-native';
+import {ListRenderItem, ListRenderItemInfo} from 'react-native';
 import EventBanner from '../../components/EventBanner';
 import CardItem from '../../components/CardItem';
 import Search from '../../components/Search';
+import {api} from '../../services/api';
+
+export type EventTypes = {
+  id: number;
+  title: string;
+  startDate: string;
+  enDate: string;
+  image: string;
+  description: string;
+  price: number;
+};
 
 export default function Home() {
+  const [highlightEvents, setHighlightEvents] = useState<EventTypes[]>([]);
+  const [eventArray, setEventArray] = useState<EventTypes[]>([]);
+
   const spacing = {
     justifyContent: 'space-between',
   };
 
-  function eventItem({item}: ListRenderItemInfo<DataProps>) {
-    return (
-      <View>
-        <CardItem data={item} />
-      </View>
-    );
+  function eventItem({item}: ListRenderItemInfo<EventTypes>) {
+    return <CardItem data={item} />;
   }
 
-  const renderItem: ListRenderItem<DataProps> = ({item}) => (
+  const renderItem: ListRenderItem<EventTypes> = ({item}) => (
     <EventBanner data={item} />
   );
+
+  const fetchHighlights = async () => {
+    const limitRange: number = 5;
+
+    try {
+      const response = await api.get(`events?&limit=${limitRange}`);
+
+      setHighlightEvents(response.data);
+    } catch (err) {
+      console.log('erro fetchHighlights', err);
+    }
+  };
+
+  const fetchEvents = async () => {
+    try {
+      const response = await api.get('events');
+
+      setEventArray(response.data);
+    } catch (err) {
+      console.log('erro fetchEvents', err);
+    }
+  };
+
+  useEffect(() => {
+    fetchHighlights();
+  }, []);
+
+  useEffect(() => {
+    fetchEvents();
+  }, []);
 
   return (
     <Container<React.ElementType>
@@ -35,8 +74,8 @@ export default function Home() {
             <EventList<React.ElementType>
               horizontal
               showsHorizontalScrollIndicator={false}
-              data={data}
-              keyExtractor={(item: DataProps) => item.id}
+              data={highlightEvents}
+              keyExtractor={(item: EventTypes) => item.id}
               renderItem={renderItem}
             />
           </Events>
@@ -45,9 +84,9 @@ export default function Home() {
 
           <CustomFlatlist<React.ElementType>
             numColumns={2}
-            data={data}
+            data={eventArray}
             renderItem={eventItem}
-            keyExtractor={(item: DataProps) => item.id}
+            keyExtractor={(item: EventTypes) => item.id}
             columnWrapperStyle={spacing}
           />
         </>

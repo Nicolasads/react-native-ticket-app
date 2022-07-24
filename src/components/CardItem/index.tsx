@@ -1,5 +1,4 @@
 import React from 'react';
-import {DataProps} from '../../data/data';
 import {
   Container,
   EventDate,
@@ -7,27 +6,39 @@ import {
   EventTitle,
   ImageContent,
 } from './styles';
-import imagem from '../../assets/image/img3.png';
 import {useNavigation} from '@react-navigation/native';
+import {EventTypes} from '../../screens/Home';
 
-export default function CardItem({data}: {data: DataProps}) {
+import moment from 'moment';
+import 'moment/min/locales';
+
+export default function CardItem({data}: {data: EventTypes}) {
   const navigation = useNavigation();
 
   const navigateEvent = () => {
     navigation.navigate(
       'EventInfo' as never,
       {
-        data: data,
+        id: data.id,
       } as never,
     );
   };
 
+  const formatPrice = (price: number) => {
+    return new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+    }).format(price);
+  };
+
   return (
     <Container onPress={navigateEvent}>
-      <ImageContent source={imagem} />
-      <EventTitle numberOfLines={2}>{data.name}</EventTitle>
-      <EventDate>{data.date}</EventDate>
-      <EventPrice>R$ {data.price}</EventPrice>
+      <ImageContent source={{uri: data.image}} />
+      <EventTitle numberOfLines={2}>{data.title}</EventTitle>
+      <EventDate>
+        {moment(data.startDate).locale('pt-br').format('lll')}
+      </EventDate>
+      <EventPrice>{formatPrice(data.price)}</EventPrice>
     </Container>
   );
 }

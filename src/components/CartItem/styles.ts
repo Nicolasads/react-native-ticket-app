@@ -43,10 +43,8 @@ export const DecreaseButton = styled.TouchableOpacity`
   height: 28px;
   align-items: center;
   justify-content: center;
-  background-color: ${({theme}) => theme.border};
+  background-color: ${({theme}) => theme.primary};
   border-radius: 8px;
-  border-width: 1px;
-  border-color: ${({theme}) => theme.lightGray};
 `;
 
 export const ItemQuantity = styled.Text`
@@ -57,15 +55,14 @@ export const ItemQuantity = styled.Text`
 export const IncreaseButton = styled.TouchableOpacity`
   width: 28px;
   height: 28px;
-  background-color: ${({theme}) => theme.border};
+  background-color: ${({theme}) => theme.primary};
   align-items: center;
   justify-content: center;
-  border-width: 1px;
-  border-color: ${({theme}) => theme.lightGray};
   border-radius: 8px;
 `;
 
 export const ButtonLabel = styled.Text`
   font-family: ${({theme}) => theme.fontSemiBold};
+  color: ${({theme}) => theme.light};
   font-size: 16px;
 `;

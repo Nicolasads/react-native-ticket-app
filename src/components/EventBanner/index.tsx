@@ -1,5 +1,4 @@
 import React from 'react';
-import {DataProps} from '../../data/data';
 import {
   Container,
   Content,
@@ -8,32 +7,47 @@ import {
   EventTitle,
   Touchable,
 } from './styles';
-import imagem from '../../assets/image/img3.png';
 import {useNavigation} from '@react-navigation/native';
+import {EventTypes} from '../../screens/Home';
 
-export default function EventBanner({data}: {data: DataProps}) {
+import 'intl';
+import 'intl/locale-data/jsonp/en';
+
+import moment from 'moment';
+import 'moment/min/locales';
+
+export default function EventBanner({data}: {data: EventTypes}) {
   const navigation = useNavigation();
 
   const imageStyles = {
     borderRadius: 8,
   };
 
+  const formatPrice = (price: number) => {
+    return new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+    }).format(price);
+  };
+
   const navigateEvent = () => {
     navigation.navigate(
       'EventInfo' as never,
       {
-        data: data,
+        id: data.id,
       } as never,
     );
   };
 
   return (
     <Touchable onPress={navigateEvent}>
-      <Container source={imagem} imageStyle={imageStyles}>
+      <Container source={{uri: data.image}} imageStyle={imageStyles}>
         <Content>
-          <EventTitle>{data.name}</EventTitle>
-          <EventDate>{data.date}</EventDate>
-          <EventPrice>R$ {data.price}</EventPrice>
+          <EventTitle numberOfLines={2}>{data.title}</EventTitle>
+          <EventDate>
+            {moment(data.startDate).locale('pt-br').format('lll')}
+          </EventDate>
+          <EventPrice>{formatPrice(data.price)}</EventPrice>
         </Content>
       </Container>
     </Touchable>

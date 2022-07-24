@@ -58,6 +58,7 @@ export const EventType = styled.Text`
 export const Divider = styled.View`
   flex-direction: row;
   align-items: center;
+  margin-bottom: 10px;
 `;
 
 export const DescriptionLabel = styled.Text`

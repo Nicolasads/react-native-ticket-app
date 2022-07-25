@@ -2,6 +2,8 @@
 
 Um projeto de compras de ingresso para eventos utilizando React Native Cli
 
+![plot](./.github/banner.png)
+
 ## Instalação
 
 Após clonar o projeto, abra o terminal e digite:

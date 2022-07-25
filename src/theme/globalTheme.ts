@@ -7,6 +7,8 @@ export const globalTheme = {
   mediumGray: '#676767',
   lightGray: '#999',
   border: '#c9c9c9',
+  backgroundInput: '#EFEFEF',
+  danger: 'tomato',
 
   fontLight: 'Montserrat-Light',
   fontRegular: 'Montserrat-Regular',

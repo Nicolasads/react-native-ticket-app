@@ -8,8 +8,15 @@ import {
 import Feather from 'react-native-vector-icons/Feather';
 import {globalTheme} from '../../theme/globalTheme';
 import CustomButton from '../../components/CustomButton';
+import {useNavigation} from '@react-navigation/native';
 
 export default function Profile() {
+  const navigation = useNavigation();
+
+  const navigateLogin = () => {
+    navigation.navigate('Login' as never);
+  };
+
   return (
     <Container>
       <ProfileTitle>Perfil</ProfileTitle>
@@ -21,7 +28,7 @@ export default function Profile() {
           Faça o login para acessar a sua conta
         </LogoutDescription>
 
-        <CustomButton title="Ir para login" />
+        <CustomButton title="Ir para login" onPress={navigateLogin} />
       </LogoutContent>
     </Container>
   );

@@ -14,7 +14,7 @@ export const CartTitle = styled.Text`
 
 export const CartItems = styled.View`
   margin: 20px 15px 10px;
-  flex: 0.85;
+  flex: 1;
 `;
 
 export const CartFooter = styled.View`

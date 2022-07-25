@@ -1,9 +1,13 @@
 import React from 'react';
 import {FlatList, ListRenderItem} from 'react-native';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import CartItem from '../../components/CartItem';
 import CustomButton from '../../components/CustomButton';
-import {getCartItems, getTotalValue} from '../../features/cart/cartSlice';
+import {
+  clearCart,
+  getCartItems,
+  getTotalValue,
+} from '../../features/cart/cartSlice';
 import {formatPrice} from '../../utils/FormatPrice';
 import {EventTypes} from '../Home';
 import {
@@ -18,14 +22,27 @@ import {
 
 import Feather from 'react-native-vector-icons/Feather';
 import {globalTheme} from '../../theme/globalTheme';
+import {useNavigation} from '@react-navigation/native';
 
 export default function Cart() {
+  const navigation = useNavigation();
+
   const getItems: EventTypes[] = useSelector(getCartItems);
   const totalValue = useSelector(getTotalValue);
+
+  const dispatch = useDispatch();
 
   const renderItem: ListRenderItem<EventTypes> = ({item}) => (
     <CartItem itemData={item} />
   );
+
+  const handleCheckout = () => {
+    navigation.navigate('Checkout' as never);
+
+    setTimeout(() => {
+      dispatch(clearCart());
+    }, 1000);
+  };
 
   return (
     <Container>
@@ -55,7 +72,7 @@ export default function Cart() {
         <CartFooter>
           <TotalValue>Valor total: {formatPrice(totalValue)} </TotalValue>
 
-          <CustomButton title="Realizar pagamento" />
+          <CustomButton onPress={handleCheckout} title="Realizar pagamento" />
         </CartFooter>
       )}
     </Container>

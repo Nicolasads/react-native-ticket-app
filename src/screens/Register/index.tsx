@@ -14,8 +14,11 @@ import {globalTheme} from '../../theme/globalTheme';
 import FormInput from '../../components/FormInput';
 import CustomButton from '../../components/CustomButton';
 import {useNavigation} from '@react-navigation/native';
+
 import * as Yup from 'yup';
 import {Formik} from 'formik';
+import {api} from '../../services/api';
+import Toast from 'react-native-toast-message';
 
 type RegisterUserProps = {
   name: string;
@@ -53,8 +56,28 @@ export default function Register() {
       .required('Campo obrigatório'),
   });
 
-  const handleRegister = (values: RegisterUserProps) => {
-    console.log('Submit', values);
+  const handleRegister = async (values: RegisterUserProps) => {
+    try {
+      const response = await api.post('/register', values);
+
+      console.log(response.data);
+
+      Toast.show({
+        type: 'success',
+        text1: 'Sucesso!',
+        text2: 'Usuário cadastrado com sucesso!',
+        position: 'top',
+      });
+
+      goBack();
+    } catch (err) {
+      Toast.show({
+        type: 'error',
+        text1: 'Aviso.',
+        text2: 'Ocorreu um erro, tente novamente.',
+        position: 'top',
+      });
+    }
   };
 
   return (

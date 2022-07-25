@@ -17,8 +17,9 @@ import {
 } from './styles';
 import CartItem from '../CartItem';
 import CustomButton from '../CustomButton';
+import {TypeEvent} from '../../screens/EventInfo';
 
-export default function CustomBottomSheet() {
+export default function CustomBottomSheet({data}: {data: TypeEvent}) {
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
   const snapPoints = useMemo(() => ['25%', '50%'], []);
@@ -61,7 +62,7 @@ export default function CustomBottomSheet() {
             <ModalTitle>Ingressos disponíveis</ModalTitle>
 
             <Tickets>
-              <CartItem />
+              <CartItem itemData={data} />
             </Tickets>
 
             <ModalFooter>

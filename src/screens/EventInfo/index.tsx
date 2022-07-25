@@ -27,10 +27,9 @@ import {api} from '../../services/api';
 import moment from 'moment';
 import 'moment/min/locales';
 
-import 'intl';
-import 'intl/locale-data/jsonp/en';
+import {formatPrice} from '../../utils/FormatPrice';
 
-type TypeEvent = {
+export type TypeEvent = {
   id?: number;
   title?: string;
   startDate?: string;
@@ -56,13 +55,6 @@ export default function EventInfo({route}: any) {
 
   const formatTime = (date?: string) => {
     return moment(date).locale('pt-br').format('LT');
-  };
-
-  const formatPrice = (price: any) => {
-    return new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL',
-    }).format(price);
   };
 
   useEffect(() => {
@@ -119,7 +111,7 @@ export default function EventInfo({route}: any) {
         </Info>
       </Scrollable>
 
-      <CustomBottomSheet />
+      <CustomBottomSheet data={eventData} />
     </Container>
   );
 }

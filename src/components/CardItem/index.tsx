@@ -11,6 +11,7 @@ import {EventTypes} from '../../screens/Home';
 
 import moment from 'moment';
 import 'moment/min/locales';
+import {formatPrice} from '../../utils/FormatPrice';
 
 export default function CardItem({data}: {data: EventTypes}) {
   const navigation = useNavigation();
@@ -22,13 +23,6 @@ export default function CardItem({data}: {data: EventTypes}) {
         id: data.id,
       } as never,
     );
-  };
-
-  const formatPrice = (price: number) => {
-    return new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL',
-    }).format(price);
   };
 
   return (

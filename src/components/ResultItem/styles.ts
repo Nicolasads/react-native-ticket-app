@@ -6,6 +6,7 @@ const windowWidth = Dimensions.get('window').width;
 export const ItemContainer = styled.TouchableOpacity`
   width: ${windowWidth - 30 + 'px'};
   flex-direction: row;
+  margin-bottom: 10px;
 `;
 
 export const ItemImage = styled.Image`

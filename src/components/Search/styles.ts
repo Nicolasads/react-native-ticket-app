@@ -107,9 +107,40 @@ export const Results = styled.View`
   margin: 20px 15px 10px;
 `;
 
+export const EmptySearch = styled.View`
+  margin-top: 180px;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const EmptySearchTitle = styled.Text`
+  width: 270px;
+  font-family: ${({theme}) => theme.fontBold};
+  color: ${({theme}) => theme.lightGray};
+  text-align: center;
+  font-size: 16px;
+  margin-top: 15px;
+`;
+
 export const ResultTitle = styled.Text`
   font-family: ${({theme}) => theme.fontBold};
   color: ${({theme}) => theme.darkGray};
   font-size: 18px;
   margin-bottom: 15px;
+`;
+
+export const EmptyResult = styled.View`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  margin-top: 180px;
+`;
+
+export const EmptyTitle = styled.Text`
+  width: 250px;
+  margin-top: 15px;
+  text-align: center;
+  font-family: ${({theme}) => theme.fontBold};
+  color: ${({theme}) => theme.lightGray};
+  font-size: 16px;
 `;

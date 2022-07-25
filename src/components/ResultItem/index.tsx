@@ -7,20 +7,24 @@ import {
   ItemPrice,
   ItemTitle,
 } from './styles';
-import image from '../../assets/image/img1.png';
+import {EventTypes} from '../../screens/Home';
+import {formatPrice} from '../../utils/FormatPrice';
 
-export default function ResultItem() {
+type ResultItemProps = {
+  item: EventTypes;
+  onPress: any;
+};
+
+export default function ResultItem({item, onPress}: ResultItemProps) {
   return (
-    <ItemContainer>
-      <ItemImage source={image} />
+    <ItemContainer onPress={onPress}>
+      <ItemImage source={{uri: item.image}} />
 
       <ItemInfo>
-        <ItemTitle numberOfLines={2}>
-          UI Event 2022: Conceitos de UI/UX para usuários
-        </ItemTitle>
+        <ItemTitle numberOfLines={2}>{item.title}</ItemTitle>
 
         <ItemDate>26 Jul 2022 - 15:00</ItemDate>
-        <ItemPrice>R$ 24,99</ItemPrice>
+        <ItemPrice>{formatPrice(item.price)}</ItemPrice>
       </ItemInfo>
     </ItemContainer>
   );

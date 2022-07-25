@@ -14,9 +14,7 @@ export default function Cart() {
     <Container>
       <CartTitle>Carrinho</CartTitle>
 
-      <CartItems>
-        <CartItem />
-      </CartItems>
+      <CartItems>{/* <CartItem /> */}</CartItems>
 
       <CartFooter>
         <TotalValue>Valor total: R$ 174,94 </TotalValue>

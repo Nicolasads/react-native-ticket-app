@@ -12,19 +12,25 @@ import {
   ItemTitle,
   QuantityDivider,
 } from './styles';
-import image from '../../assets/image/img1.png';
+import {TypeEvent} from '../../screens/EventInfo';
+import {formatPrice} from '../../utils/FormatPrice';
 
-export default function CartItem() {
+import moment from 'moment';
+import 'moment/min/locales';
+
+export default function CartItem({itemData}: {itemData: TypeEvent}) {
+  const formatDate = (date?: string) => {
+    return moment(date).locale('pt-br').format('lll');
+  };
+
   return (
     <Container>
-      <ItemImage source={image} />
+      <ItemImage source={{uri: itemData.image}} />
 
       <ItemDivider>
-        <ItemTitle numberOfLines={2}>
-          Evento Google 2022: Grandes Revoluções
-        </ItemTitle>
-        <ItemDate>28 Jul 2022 - 14:00</ItemDate>
-        <ItemPrice>R$ 34,99</ItemPrice>
+        <ItemTitle numberOfLines={2}>{itemData.title}</ItemTitle>
+        <ItemDate>{formatDate(itemData.startDate)}</ItemDate>
+        <ItemPrice>{formatPrice(itemData.price)}</ItemPrice>
       </ItemDivider>
 
       <QuantityDivider>

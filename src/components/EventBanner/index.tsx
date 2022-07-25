@@ -15,19 +15,13 @@ import 'intl/locale-data/jsonp/en';
 
 import moment from 'moment';
 import 'moment/min/locales';
+import {formatPrice} from '../../utils/FormatPrice';
 
 export default function EventBanner({data}: {data: EventTypes}) {
   const navigation = useNavigation();
 
   const imageStyles = {
     borderRadius: 8,
-  };
-
-  const formatPrice = (price: number) => {
-    return new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL',
-    }).format(price);
   };
 
   const navigateEvent = () => {

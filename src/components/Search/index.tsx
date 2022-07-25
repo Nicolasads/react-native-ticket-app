@@ -3,6 +3,10 @@ import {
   ClearTextButton,
   CloseText,
   Divider,
+  EmptyResult,
+  EmptySearch,
+  EmptySearchTitle,
+  EmptyTitle,
   HeaderModal,
   HeaderTitle,
   Input,
@@ -20,12 +24,19 @@ import {
 import Feather from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {globalTheme} from '../../theme/globalTheme';
-import {Modal} from 'react-native';
+import {FlatList, Modal, ListRenderItemInfo} from 'react-native';
 import ResultItem from '../ResultItem';
+import {api} from '../../services/api';
+import {EventTypes} from '../../screens/Home';
+import {useNavigation} from '@react-navigation/native';
 
 export default function Search() {
-  const [visible, setVisible] = useState(false);
   const [search, setSearch] = useState('');
+  const [visible, setVisible] = useState(false);
+  const [dataResult, setDataResult] = useState<EventTypes[]>([]);
+  const [isShowResult, setIsShowResult] = useState<boolean>(false);
+
+  const navigation = useNavigation();
 
   const showModal = () => {
     setVisible(true);
@@ -34,10 +45,38 @@ export default function Search() {
   const closeModal = () => {
     setSearch('');
     setVisible(false);
+    setDataResult([]);
+    setIsShowResult(false);
   };
 
   const clearText = () => {
     setSearch('');
+  };
+
+  const renderItem = ({item}: ListRenderItemInfo<EventTypes>) => {
+    const navigateEvent = () => {
+      navigation.navigate(
+        'EventInfo' as never,
+        {
+          id: item.id,
+        } as never,
+      );
+
+      closeModal();
+    };
+
+    return <ResultItem item={item} onPress={navigateEvent} />;
+  };
+
+  const handleSearch = async () => {
+    try {
+      const response = await api.get(`events?title_like=${search}`);
+
+      setDataResult(response.data);
+      setIsShowResult(true);
+    } catch (err) {
+      console.log('handleSearch error: ', err);
+    }
   };
 
   return (
@@ -81,18 +120,44 @@ export default function Search() {
               )}
             </SearchInput>
 
-            <SearchButton>
+            <SearchButton onPress={handleSearch}>
               <Feather name="search" color={globalTheme.light} size={26} />
             </SearchButton>
           </SearchField>
 
-          {search !== '' && (
-            <Results>
-              <ResultTitle> Resultados para {search} </ResultTitle>
+          <Results>
+            {isShowResult ? (
+              <>
+                <ResultTitle>Resultados da busca</ResultTitle>
+                <FlatList
+                  data={dataResult}
+                  keyExtractor={(item: any) => item.id}
+                  renderItem={renderItem}
+                  ListEmptyComponent={
+                    <EmptyResult>
+                      <Feather
+                        name="search"
+                        color={globalTheme.lightGray}
+                        size={70}
+                      />
 
-              <ResultItem />
-            </Results>
-          )}
+                      <EmptyTitle>
+                        Não encontramos resultados para sua pesquisa.
+                      </EmptyTitle>
+                    </EmptyResult>
+                  }
+                />
+              </>
+            ) : (
+              <EmptySearch>
+                <Feather name="info" color={globalTheme.lightGray} size={70} />
+
+                <EmptySearchTitle>
+                  Você ainda não fez sua busca, comece a pesquisar!
+                </EmptySearchTitle>
+              </EmptySearch>
+            )}
+          </Results>
         </SearchContent>
       </Modal>
     </SearchContainer>

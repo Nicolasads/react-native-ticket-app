@@ -1,8 +1,12 @@
+import {Dimensions} from 'react-native';
 import styled from 'styled-components/native';
+
+const windowWidth = Dimensions.get('window').width;
 
 export const Container = styled.View`
   flex-direction: row;
   justify-content: center;
+  margin-bottom: 10px;
 `;
 
 export const ItemImage = styled.Image`
@@ -18,7 +22,7 @@ export const ItemDivider = styled.View`
 export const ItemTitle = styled.Text`
   font-family: ${({theme}) => theme.fontBold};
   color: ${({theme}) => theme.darkGray};
-  width: 200px;
+  width: ${windowWidth - 220 + 'px'};
 `;
 
 export const ItemDate = styled.Text`

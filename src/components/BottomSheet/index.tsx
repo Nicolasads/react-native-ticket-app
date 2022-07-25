@@ -6,6 +6,12 @@ import {
 } from '@gorhom/bottom-sheet';
 import {
   EventFooter,
+  ItemContainer,
+  ItemDate,
+  ItemDivider,
+  ItemImage,
+  ItemPrice,
+  ItemTitle,
   ModalContainer,
   ModalContent,
   ModalFooter,
@@ -13,16 +19,29 @@ import {
   TicketButton,
   TicketButtonLabel,
   Tickets,
-  TotalValue,
 } from './styles';
-import CartItem from '../CartItem';
 import CustomButton from '../CustomButton';
+
 import {TypeEvent} from '../../screens/EventInfo';
+import {formatPrice} from '../../utils/FormatPrice';
+import Toast from 'react-native-toast-message';
+
+import moment from 'moment';
+import 'moment/min/locales';
+
+import {useDispatch} from 'react-redux';
+import {addToCart} from '../../features/cart/cartSlice';
 
 export default function CustomBottomSheet({data}: {data: TypeEvent}) {
+  const dispatch = useDispatch();
+
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
   const snapPoints = useMemo(() => ['25%', '50%'], []);
+
+  const formatDate = (date?: string) => {
+    return moment(date).locale('pt-br').format('lll');
+  };
 
   const handlePresentModalPress = useCallback(() => {
     bottomSheetModalRef.current?.present();
@@ -43,6 +62,21 @@ export default function CustomBottomSheet({data}: {data: TypeEvent}) {
     [],
   );
 
+  const handleAddItem = (item: any) => {
+    const itemData = {
+      ...item,
+    };
+
+    console.log(itemData);
+    dispatch(addToCart(itemData));
+    Toast.show({
+      type: 'success',
+      text1: 'Sucesso!',
+      text2: 'Ingresso adicionado ao carrinho.',
+      position: 'top',
+    });
+  };
+
   return (
     <BottomSheetModalProvider>
       <ModalContainer>
@@ -62,13 +96,22 @@ export default function CustomBottomSheet({data}: {data: TypeEvent}) {
             <ModalTitle>Ingressos disponíveis</ModalTitle>
 
             <Tickets>
-              <CartItem itemData={data} />
+              <ItemContainer>
+                <ItemImage source={{uri: data.image}} />
+
+                <ItemDivider>
+                  <ItemTitle numberOfLines={2}>{data.title}</ItemTitle>
+                  <ItemDate>{formatDate(data.startDate)}</ItemDate>
+                  <ItemPrice>{formatPrice(data.price)}</ItemPrice>
+                </ItemDivider>
+              </ItemContainer>
             </Tickets>
 
             <ModalFooter>
-              <TotalValue>Valor total: R$ 34,99</TotalValue>
-
-              <CustomButton title="Adicionar ao carrinho" />
+              <CustomButton
+                onPress={() => handleAddItem(data)}
+                title="Adicionar ao carrinho"
+              />
             </ModalFooter>
           </ModalContent>
         </BottomSheetModal>

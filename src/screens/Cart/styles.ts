@@ -29,3 +29,17 @@ export const TotalValue = styled.Text`
   text-align: right;
   margin-bottom: 10px;
 `;
+
+export const EmptyCart = styled.View`
+  align-items: center;
+  justify-content: center;
+  height: 600px;
+`;
+
+export const EmptyTitle = styled.Text`
+  font-family: ${({theme}) => theme.fontBold};
+  color: ${({theme}) => theme.lightGray};
+  font-size: 16px;
+  text-align: center;
+  margin-top: 15px;
+`;

@@ -36,14 +36,18 @@ export type TypeEvent = {
   enDate?: string;
   image?: string;
   description?: string;
-  price?: number;
+  price: number;
+  quantity: number;
 };
 
 export default function EventInfo({route}: any) {
   let {id} = route.params;
   const navigation = useNavigation();
 
-  const [eventData, setEventData] = useState<TypeEvent>({});
+  const [eventData, setEventData] = useState<TypeEvent>({
+    price: 0,
+    quantity: 1,
+  });
 
   const goBack = () => {
     navigation.goBack();

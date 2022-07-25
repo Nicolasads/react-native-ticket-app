@@ -14,6 +14,7 @@ export type EventTypes = {
   image: string;
   description: string;
   price: number;
+  quantity: number;
 };
 
 export default function Home() {

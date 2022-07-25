@@ -29,11 +29,16 @@ import Toast from 'react-native-toast-message';
 import moment from 'moment';
 import 'moment/min/locales';
 
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {addToCart} from '../../features/cart/cartSlice';
+import {userIsLogged} from '../../features/auth/authSlice';
+import {useNavigation} from '@react-navigation/native';
 
 export default function CustomBottomSheet({data}: {data: TypeEvent}) {
   const dispatch = useDispatch();
+  const userLogged = useSelector(userIsLogged);
+
+  const navigation = useNavigation();
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
@@ -62,6 +67,21 @@ export default function CustomBottomSheet({data}: {data: TypeEvent}) {
     [],
   );
 
+  const verifyUser = () => {
+    if (userLogged) {
+      handlePresentModalPress();
+    } else {
+      Toast.show({
+        type: 'info',
+        text1: 'Aviso.',
+        text2: 'Para adicionar ingresssos ao carrinho, é necessário logar',
+        position: 'top',
+      });
+
+      navigation.navigate('Login' as never);
+    }
+  };
+
   const handleAddItem = (item: any) => {
     const itemData = {
       ...item,
@@ -81,7 +101,7 @@ export default function CustomBottomSheet({data}: {data: TypeEvent}) {
     <BottomSheetModalProvider>
       <ModalContainer>
         <EventFooter>
-          <TicketButton onPress={handlePresentModalPress}>
+          <TicketButton onPress={verifyUser}>
             <TicketButtonLabel>Ver Ingressos</TicketButtonLabel>
           </TicketButton>
         </EventFooter>

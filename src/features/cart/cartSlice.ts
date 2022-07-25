@@ -1,5 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import Toast from 'react-native-toast-message';
+import {RootState} from '../store/store';
 
 export interface Cart {
   id: number;
@@ -63,9 +64,9 @@ export const cartSlice = createSlice({
   },
 });
 
-export const getCartItems = (state: any) => state.cart.cartItems;
+export const getCartItems = (state: RootState) => state.cart.cartItems;
 
-export const getTotalValue = (state: any) => {
+export const getTotalValue = (state: RootState) => {
   return state.cart.cartItems.reduce((total: number, cartItem: Cart) => {
     return cartItem.price * cartItem.quantity + total;
   }, 0);

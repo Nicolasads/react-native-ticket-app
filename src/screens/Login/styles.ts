@@ -45,6 +45,7 @@ export const TopCircle = styled.View`
   position: absolute;
   top: -100px;
   right: -130px;
+  z-index: -1;
 `;
 
 export const Circle = styled.View`
@@ -55,4 +56,5 @@ export const Circle = styled.View`
   position: absolute;
   bottom: -150px;
   left: -60px;
+  z-index: -1;
 `;

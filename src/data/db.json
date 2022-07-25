@@ -8,9 +8,8 @@
     },
     {
       "email": "nicolas1@email.com",
-      "password": "$2a$10$MVNW9wkcr2maJmi9Ar8Ui.VMQgYD3l81wsHllxSI6iZuo65T/mlkq",
+      "password": "$2a$10$HSwaDxCCYE6Ii9nI6crm9OnxBbktGXje5m6W.PO2I2kMvSZ0au73G",
       "name": "Nicolas Alexsander",
-      "confirmPassword": "123123",
       "id": 2
     }
   ],

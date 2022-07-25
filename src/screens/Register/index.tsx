@@ -58,7 +58,13 @@ export default function Register() {
 
   const handleRegister = async (values: RegisterUserProps) => {
     try {
-      const response = await api.post('/register', values);
+      const data = {
+        name: values.name,
+        password: values.password,
+        email: values.email,
+      };
+
+      const response = await api.post('/register', data);
 
       console.log(response.data);
 
@@ -87,7 +93,7 @@ export default function Register() {
           <Feather name="arrow-left" size={35} color={globalTheme.darkGray} />
         </BackButton>
 
-        <RegisterTitle>Registro</RegisterTitle>
+        <RegisterTitle>Cadastro</RegisterTitle>
       </RegisterHeader>
 
       <Formik
